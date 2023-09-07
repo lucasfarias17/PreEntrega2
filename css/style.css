@@ -1,0 +1,129 @@
+h1 {
+    background-color: rgba(255, 0, 0, 0.7);
+    font-style: italic;
+    font-size: 40px;
+    margin: 30px;
+}
+
+h1,
+a {
+    color: antiquewhite;
+    text-decoration: none;
+    padding: 15px;
+}
+
+.contenedorFiltros {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contenedorPrincipal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#camisetas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 60%;
+    max-height: 30%;
+    padding: 100px;
+    gap: 25px;
+}
+
+.tarjetaCamiseta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2px;
+    width: 200px;
+    height: 300px;
+    border: 2px solid black;
+    border-radius: 20px;
+    box-shadow: 4px 5px 9px black;
+}
+
+.tarjetaCamiseta:hover{
+    box-shadow: 8px 10px 25px black;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.tarjetaCamiseta,
+p {
+    margin: 8px;
+}
+
+#buscador {
+    width: 200px;
+    max-height: 30px;
+}
+
+#carrito {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 200px;
+    min-width: 1200px;
+    max-width: 1200px;
+    gap: 11px;
+    margin: 0 auto;
+    border: 1px solid black;
+    box-shadow: 2px 3px 5px black;
+}
+
+img {
+    width: 130px;
+    height: 130px;
+}
+
+.tarjetaEnCarrito {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    width: 100px;
+    border: 1px solid black;
+}
+
+#contenedorBotonComprar {
+    display: flex;
+    flex-direction: row-reverse;
+    border: 1px black solid;
+    padding: 10px;
+    margin: 15px;
+}
+
+#contenedorCarrito {
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
+}
+
+.oculto {
+    display: none !important;
+}
+
+.pngCarrito {
+    width: 25px;
+    height: 25px;
+}
+
+.contenedorBotonesFiltro {
+    display: flex;
+    align-items: center;
+    width: 450px;
+    justify-content: space-around;
+}
+
+.botonFiltro {
+    font-size: 15px;
+}

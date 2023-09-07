@@ -1,11 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./js/main.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
+    <header>
+        <h1><a href="index.html">International Pilchas</a></h1>
+    </header>
+    <main>
+        <section class="contenedorFiltros">
+            <input id="buscador" placeholder="Buscar por nombre de club o liga">
+            <div class="contenedorBotonesFiltro">
+                <button class="botonFiltro" id="masVendido">Más vendido</button>
+                <button class="botonFiltro" id="europa">Europa</button>
+                <button class="botonFiltro" id="america">América</button>
+                <button class="botonFiltro" id="seleccion">Selecciones</button>
+                <a id="verCarrito"><img class="pngCarrito" src="./images/carrito.png" alt=""></a>
+            </div>
+        </section>
+        <section class="contenedorPrincipal">
+            <div id="camisetas"></div>
+            <div class="oculto" id="contenedorCarrito">
+                <div id="carrito"></div>
+                <div id="contenedorBotonComprar">
+                    <button id="botonComprar">Comprar</button>
+                </div>
+            </div>
+        </section>
+    </main>
 </body>
+
+<script src="./js/main.js"></script>
+
 </html>
