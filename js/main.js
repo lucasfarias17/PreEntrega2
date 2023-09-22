@@ -1,29 +1,9 @@
-principal()
-function principal() {
-    const camisetasOriginal = [
-        { id: 1, nombre: "River Plate", liga: "Liga Profesional Argentina", continente: "America", imagen: "riverplate.jfif", stock: 4, precio: 10000 },
-        { id: 2, nombre: "San Lorenzo", liga: "Liga Profesional Argentina", continente: "America", imagen: "sanlorenzo.jfif", stock: 11, precio: 4000 },
-        { id: 3, nombre: "Chelsea", liga: "Premier League", continente: "Europa", imagen: "chelsea.jfif", stock: 9, precio: 8000 },
-        { id: 4, nombre: "Barcelona", liga: "La Liga", continente: "Europa", imagen: "barcelona.jfif", stock: 12, precio: 9200 },
-        { id: 5, nombre: "Racing", liga: "Liga Profesional Argentina", continente: "America", imagen: "racing.jfif", stock: 15, precio: 5300 },
-        { id: 6, nombre: "Milan", liga: "Serie A", continente: "Europa", imagen: "milan.jfif", stock: 5, precio: 6700 },
-        { id: 12, nombre: "Argentina", liga: "Selecciones", continente: "Seleccion", imagen: "argentina.jfif", stock: 2, precio: 11500 },
-        { id: 8, nombre: "Manchester United", liga: "Premier League", continente: "Europa", imagen: "munited.jfif", stock: 5, precio: 7500 },
-        { id: 9, nombre: "Real Madrid", liga: "La Liga", continente: "Europa", imagen: "realmadrid.jfif", stock: 3, precio: 8700 },
-        { id: 10, nombre: "Inter Miami", liga: "MLS", continente: "America", imagen: "intermiami.jfif", stock: 2, precio: 10000 },
-        { id: 11, nombre: "Chacarita", liga: "B Nacional Argentina", continente: "America", imagen: "chacarita.jfif", stock: 15, precio: 3500 },
-        { id: 13, nombre: "Inter de Milan", liga: "Serie A", continente: "Europa", imagen: "inter.jfif", stock: 8, precio: 6700 },
-        { id: 14, nombre: "Atlanta", liga: "B Nacional Argentina", continente: "America", imagen: "atlanta.jfif", stock: 13, precio: 3500 },
-        { id: 17, nombre: "Francia", liga: "Selecciones", continente: "Seleccion", imagen: "francia.jfif", stock: 6, precio: 11500 },
-        { id: 15, nombre: "Liverpool", liga: "Premier League", continente: "Europa", imagen: "liverpool.jfif", stock: 7, precio: 8000 },
-        { id: 16, nombre: "Atletico de Madrid", liga: "La Liga", continente: "Europa", imagen: "atleticomadrid.jfif", stock: 7, precio: 7500 },
-        { id: 7, nombre: "Brasil", liga: "Selecciones", continente: "Seleccion", imagen: "brasil.jfif", stock: 10, precio: 11500 },
-        { id: 18, nombre: "Arsenal", liga: "Premier League", continente: "Europa", imagen: "arsenal.jfif", stock: 6, precio: 7200 }
-    ]
-
+function principal(camisetasBD) {
+    const camisetasOriginal = camisetasBD
+    
     let inputBuscador = document.getElementById("buscador")
     inputBuscador.addEventListener("input", () => filtrarCamisetas(camisetasOriginal, inputBuscador))
-
+    
     let botonFiltros = document.getElementsByClassName("botonFiltro")
     for (const botonFiltro of botonFiltros) {
         botonFiltro.addEventListener("click", () => filtrarPorContinente(camisetasOriginal, botonFiltro.id))
@@ -45,12 +25,20 @@ function principal() {
 function verCarrito() {
     document.getElementById("camisetas").classList.toggle("oculto")
     document.getElementById("contenedorCarrito").classList.toggle("oculto")
-    
+
 }
 
 function comprar() {
     localStorage.removeItem("carrito")
-    alert("Gracias por su compra!")
+
+    Swal.fire({
+        title: '¡Compra realizada!',
+        text: 'Gracias por elegirnos',
+        icon: 'success',
+        // timer: 3000,
+        confirmButtonColor: '#ff0000b3'
+      })
+
     renderizarCarrito()
 }
 
@@ -98,12 +86,14 @@ function agregarAlCarrito(camisetas, e) {
     let camisetaEnCarrito = carrito.find(camiseta => camiseta.id === camisetaBuscada.id)
     if (camisetaBuscada.stock > 0) {
         camisetaBuscada.stock--
+        lanzarTostada("Camiseta agregada a su carrito con éxito")
         if (camisetaEnCarrito) {
             camisetaEnCarrito.unidades++
             camisetaEnCarrito.subtotal = camisetaEnCarrito.precioUnitario * camisetaEnCarrito.unidades
         } else {
             carrito.push({
                 id: camisetaBuscada.id,
+                imagen: camisetaBuscada.imagen,
                 nombre: camisetaBuscada.nombre,
                 precioUnitario: camisetaBuscada.precio,
                 subtotal: camisetaBuscada.precio,
@@ -112,9 +102,31 @@ function agregarAlCarrito(camisetas, e) {
         }
 
     } else {
-        alert("Stock agotado.")
+        lanzarTostada("Lo sentimos, en este momento no hay stock de este producto.")
     }
+
     localStorage.setItem("carrito", JSON.stringify(carrito))
+
+    if (carrito.length > 0) {
+        let headerCarrito = document.getElementById("headerCarrito")
+        let columnasHeader = "<p>Camiseta</p><p>Club</p><p>Precio</p><p>Unidades</p><p>Subtotal</p>"
+        headerCarrito.innerHTML = columnasHeader
+
+        let botonComprar = document.getElementById("botonComprar")
+        if (botonComprar.classList.contains("oculto")) {
+            botonComprar.classList.remove("oculto")
+        }
+    } else {
+        let headerCarrito = document.getElementById("headerCarrito")
+        headerCarrito.innerHTML = ""
+        let botonComprar = document.getElementById("botonComprar")
+
+        if (!botonComprar.classList.contains("oculto")) {
+            botonComprar.classList.add("oculto")
+        }
+
+
+    }
 
     renderizarCarrito()
 }
@@ -124,42 +136,80 @@ function renderizarCarrito() {
     let contenedor = document.getElementById("carrito")
     contenedor.innerHTML = ""
     let carrito = recuperarCarrito()
-    let precioTotal = 0 
-    carrito.forEach(camiseta => {
-        let tarjetaCamiseta = document.createElement("div")
-        tarjetaCamiseta.classList.add("tarjetaEnCarrito")
-        tarjetaCamiseta.innerHTML = `
-        <p>${camiseta.nombre}</p>
-        <p>$${camiseta.precioUnitario}</p>
-        <p>${camiseta.unidades} unidades</p>
-        <p>$${camiseta.subtotal}</p>
-    
+    let headerCarrito = document.getElementById("headerCarrito")
+
+    if (carrito.length === 0) {
+        contenedor.innerHTML = "<p>Su carrito está vacío</p>"
+        contenedor.classList.add("carritoVacio")
+        headerCarrito.innerHTML = ""
+        let precioTotal = document.getElementById("precioTotal")
+        if (precioTotal) {
+            precioTotal.remove()
+        }
+        let botonComprar = document.getElementById("botonComprar")
+        if (botonComprar) {
+            botonComprar.classList.add("oculto")
+        }
+    } else {
+        let precioTotal = 0
+        carrito.forEach(camiseta => {
+            let tarjetaCamiseta = document.createElement("div")
+            tarjetaCamiseta.classList.add("tarjetaEnCarrito")
+            tarjetaCamiseta.innerHTML = `
+            <img src=./images/${camiseta.imagen}>
+            <p>${camiseta.nombre}</p>
+            <p>$${camiseta.precioUnitario}</p>
+            <p>${camiseta.unidades}</p>
+            <p>$${camiseta.subtotal}</p>
+            `
+            contenedor.appendChild(tarjetaCamiseta)
+
+            precioTotal += camiseta.precioUnitario * camiseta.unidades
+        })
+        
+        let precioTotalTexto = document.createElement("p")
+        precioTotalTexto.id = "precioTotal"
+        precioTotalTexto.innerHTML = `
+        <p>Precio total: $${precioTotal}</p>
         `
-        contenedor.appendChild(tarjetaCamiseta)
-
-        precioTotal += camiseta.precioUnitario + camiseta.unidades
-    })
-
-    let precioTotalTexto = document.createElement("p")
-    precioTotalTexto.id = "precioTotal"
-    precioTotalTexto.textContent = `
-    Precio total: $${precioTotal}
-    `
-
-    let totalAnterior = document.getElementById("precioTotal")
-    if (totalAnterior) {
-        totalAnterior.remove()    
+        
+        let totalAnterior = document.getElementById("precioTotal")
+        if (totalAnterior) {
+            totalAnterior.remove()
+        }
+        
+        contenedorBotonComprar.appendChild(precioTotalTexto)
     }
-    
-    contenedorBotonComprar.appendChild(precioTotalTexto)
 }
 
 function calcularPrecioTotal() {
     let carrito = recuperarCarrito()
     let precioTotal = carrito.reduce((total, camiseta) => total + camiseta.subtotal, 0)
-    return precioTotal 
+    return precioTotal
 }
 
 function recuperarCarrito() {
     return localStorage.getItem("carrito") ? JSON.parse(localStorage.getItem("carrito")) : []
 }
+
+function lanzarTostada(text) {
+    Toastify({
+        text,
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        position: "center",
+        stopOnFocus: true,
+        style: {
+            background: "#ff0000b3",
+            color: "#faebd7"
+        },
+        onClick: function () { }
+    }).showToast()
+}
+fetch('./array/data.json')
+    .then(respuesta => respuesta.json())
+    .then(camisetas => principal(camisetas))
+    .catch(error => console.log(error))

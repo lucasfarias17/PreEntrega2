@@ -1,0 +1,164 @@
+[
+    {
+        "id": 1,
+        "nombre": "River Plate",
+        "liga": "Liga Profesional Argentina",
+        "continente": "America",
+        "imagen": "riverplate.jfif",
+        "stock": 4,
+        "precio": 10000
+    },
+    {
+        "id": 2,
+        "nombre": "San Lorenzo",
+        "liga": "Liga Profesional Argentina",
+        "continente": "America",
+        "imagen": "sanlorenzo.jfif",
+        "stock": 11,
+        "precio": 4000
+    },
+    {
+        "id": 3,
+        "nombre": "Chelsea",
+        "liga": "Premier League",
+        "continente": "Europa",
+        "imagen": "chelsea.jfif",
+        "stock": 9,
+        "precio": 8000
+    },
+    {
+        "id": 4,
+        "nombre": "Barcelona",
+        "liga": "La Liga",
+        "continente": "Europa",
+        "imagen": "barcelona.jfif",
+        "stock": 12,
+        "precio": 9200
+    },
+    {
+        "id": 5,
+        "nombre": "Racing",
+        "liga": "Liga Profesional Argentina",
+        "continente": "America",
+        "imagen": "racing.jfif",
+        "stock": 15,
+        "precio": 5300
+    },
+    {
+        "id": 6,
+        "nombre": "Milan",
+        "liga": "Serie A",
+        "continente": "Europa",
+        "imagen": "milan.jfif",
+        "stock": 5,
+        "precio": 6700
+    },
+    {
+        "id": 12,
+        "nombre": "Argentina",
+        "liga": "Selecciones",
+        "continente": "Seleccion",
+        "imagen": "argentina.jfif",
+        "stock": 2,
+        "precio": 11500
+    },
+    {
+        "id": 8,
+        "nombre": "Manchester United",
+        "liga": "Premier League",
+        "continente": "Europa",
+        "imagen": "munited.jfif",
+        "stock": 5,
+        "precio": 7500
+    },
+    {
+        "id": 9,
+        "nombre": "Real Madrid",
+        "liga": "La Liga",
+        "continente": "Europa",
+        "imagen": "realmadrid.jfif",
+        "stock": 3,
+        "precio": 8700
+    },
+    {
+        "id": 10,
+        "nombre": "Inter Miami",
+        "liga": "MLS",
+        "continente": "America",
+        "imagen": "intermiami.jfif",
+        "stock": 2,
+        "precio": 10000
+    },
+    {
+        "id": 11,
+        "nombre": "Chacarita",
+        "liga": "B Nacional Argentina",
+        "continente": "America",
+        "imagen": "chacarita.jfif",
+        "stock": 15,
+        "precio": 3500
+    },
+    {
+        "id": 13,
+        "nombre": "Inter de Milan",
+        "liga": "Serie A",
+        "continente": "Europa",
+        "imagen": "inter.jfif",
+        "stock": 8,
+        "precio": 6700
+    },
+    {
+        "id": 14,
+        "nombre": "Atlanta",
+        "liga": "B Nacional Argentina",
+        "continente": "America",
+        "imagen": "atlanta.jfif",
+        "stock": 13,
+        "precio": 3500
+    },
+    {
+        "id": 17,
+        "nombre": "Francia",
+        "liga": "Selecciones",
+        "continente": "Seleccion",
+        "imagen": "francia.jfif",
+        "stock": 6,
+        "precio": 11500
+    },
+    {
+        "id": 15,
+        "nombre": "Liverpool",
+        "liga": "Premier League",
+        "continente": "Europa",
+        "imagen": "liverpool.jfif",
+        "stock": 7,
+        "precio": 8000
+    },
+    {
+        "id": 16,
+        "nombre": "Atletico de Madrid",
+        "liga": "La Liga",
+        "continente": "Europa",
+        "imagen": "atleticomadrid.jfif",
+        "stock": 7,
+        "precio": 7500
+    },
+    {
+        "id": 7,
+        "nombre": "Brasil",
+        "liga": "Selecciones",
+        "continente": "Seleccion",
+        "imagen": "brasil.jfif",
+        "stock": 10,
+        "precio": 11500
+    },
+    {
+        "id": 18,
+        "nombre": "Arsenal",
+        "liga": "Premier League",
+        "continente": "Europa",
+        "imagen": "arsenal.jfif",
+        "stock": 6,
+        "precio": 7200
+    }
+]
